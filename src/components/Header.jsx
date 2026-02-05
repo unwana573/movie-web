@@ -10,9 +10,10 @@ function Header() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        navigate(`/search?query=${searchInput}`);
-        console.log("Search Input:", searchInput);
-    }, [searchInput]);
+        if(searchInput){
+            navigate(`/search?query=${searchInput}`);
+        }
+    },[searchInput]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -22,7 +23,7 @@ function Header() {
 return (
     <header className='fixed top-0 w-full h-16 bg-neutral-600 bg-opacity-75'>
         <div className='container mx-auto px-2] flex items-center h-full'>
-            <Link to="/">
+            <Link to="/" className='ml-5'>
                 <img src={logo} alt="Logo" />
             </Link>
 
