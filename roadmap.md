@@ -23,4 +23,9 @@ src/
 moniepoint
 victor marcus
 
-2:00:00
+2:13:51
+
+
+1. add vpn to the category
+2. remove the paystack payment method 
+3. make provision for payment reciept to be uploaded for the manual payment method
