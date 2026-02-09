@@ -39,7 +39,7 @@ return (
                 bannerData.map((data, index) => {
                     console.log("Data",data);
                     return(
-                        <div className='min-w-full min-h-112.5 lg:min-h-full overflow-hidden relative group transition-all' style={{ transform: `translateX(-${currentImage * 100}%)` }}>
+                        <div key={data.id+"bannerHome"+index} className='min-w-full min-h-112.5 lg:min-h-full overflow-hidden relative group transition-all' style={{ transform: `translateX(-${currentImage * 100}%)` }}>
                             <div className='w-full h-full'>
                                 <img src={imageURL+data.backdrop_path} alt=""
                                 className='h-full w-full object-cover'/>
