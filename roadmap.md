@@ -25,21 +25,15 @@ victor marcus
 
 2:34:55
 
-1. 🇺🇸 Facebook Usage Rules
- 🛡️ VPN Required: Use HMA VPN connected to the required USA location only.
- 📱 Clean Facebook App: Make sure no old Facebook accounts exist on your device. Delete the app  and reinstall before login to avoid suspension or lock.
- ⏳ Soaking Period: Do not edit or use the account for 16–24 hours. Allow the account to soak on  the device.
- 🔒 No Changes: Do not change any account details. Your account is safe and secured if rules are  followed.
- 📵 One Device Only: Do not login on multiple devices. One account, one device.
- 🧑‍💻 Create Profile & Page Instructions
- 🌐 Login on a clean browser and wait.
- ⏰ After 6 hours, login on the Facebook app and create your profile.
- 
- ⚠️ This works most of the time. If it fails, no replacement will be provided.
- 
- 👍 I Understand
- 🔥
- 💯
- ✅
-2. payment are not showing on the admin dashboard for confimation
-3.
+1. convert the price in the new product from kobo to thousand 
+2. Log in as admin and test the payment approval flow end-to-end — approve and reject a pending payment
+3. use the real life social media logo of each product 
+4. the admin cannot add vpn, all texting app, netflix account, pia socks 5 proxy, snapchat, working format products when the save button is clicked it shows and error that says new row for relation "products" violates check constraint "product_category_check"
+5. add home to the navbar
+6. replace the whatsapp link with https://chat.whatsapp.com/EyDnN7elR6K0Dm49VgGt9r
+7. replace the tiktok link with 
+
+
+I want to replace the placeholder photos with my own images
+Add a soft background music that auto-plays when visiting the page
+make it only one picture that shows the rest should be hidden and auto scroll
