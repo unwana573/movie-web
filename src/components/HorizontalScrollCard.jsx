@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import Card from './Card'
 import { FaCircleArrowLeft, FaCircleArrowRight } from 'react-icons/fa6'
 
-function HorizontalScrollCard({data = [], heading}) {
+function HorizontalScrollCard({data = [], heading, trending}) {
 
     const containerRef = useRef()
 
@@ -13,21 +13,21 @@ function HorizontalScrollCard({data = [], heading}) {
         containerRef.current.scrollLeft -=  200
     }
 return (
-    <div className='container mx-auto pl-13 pr-13 my-10'>    
+    <div className='container mx-auto pl-13 pr-14 my-10'>    
         <h2 className='text-xl lg:text-2xl font-bold mb-3 text-white'>{heading}</h2>
     
         <div className='relative'>
 
-            <div ref={containerRef} className='grid grid-cols-[repeat(auto-fit,210px)] grid-flow-col gap-6 overflow-hidden overflow-x-scroll relative z-10 scroll-smooth transition-all'>
+            <div ref={containerRef} className='grid grid-cols-[repeat(auto-fit,210px)] grid-flow-col gap-6 overflow-hidden overflow-x-scroll relative z-10 scroll-smooth transition-all scrollbar-none'>
                 {
                     data.map((data, index) => {
                         return(
-                            <Card key={data.id+"heading"+index} data={data} trending={true} index={index + 1} />
+                            <Card key={data.id+"heading"+index} data={data} trending={trending} index={index + 1} />
                         )
                     })
                 }
             </div>
-            <div className='absolute top-0 flex justify-between w-full mt-35'>
+            <div className='absolute top-0 hidden lg:flex justify-between w-full mt-35'>
                 <button onClick={handlePrev} className='bg-white h-full p-1 text-black rounded-full -ml-1 z-10'>
                     <FaCircleArrowLeft />
                 </button>

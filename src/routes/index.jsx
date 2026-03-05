@@ -16,10 +16,10 @@ const router = createBrowserRouter([
             },
             {
                 path: ":explore",
-                element: <ExplorePage /> 
+                element: <ExplorePage />
             },
             {
-                path: "explore/:id",
+                path: ":media_type/:id",
                 element: <DetailPage />
             },
             {

@@ -37,7 +37,6 @@ return (
         <div className='flex min-h-svh max-h-[95vh] overflow-hidden'>
             {
                 bannerData.map((data, index) => {
-                    console.log("Data",data);
                     return(
                         <div key={data.id+"bannerHome"+index} className='min-w-full min-h-112.5 lg:min-h-full overflow-hidden relative group transition-all' style={{ transform: `translateX(-${currentImage * 100}%)` }}>
                             <div className='w-full h-full'>
