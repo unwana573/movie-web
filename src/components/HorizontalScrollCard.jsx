@@ -1,41 +1,125 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import Card from './Card'
 import { FaCircleArrowLeft, FaCircleArrowRight } from 'react-icons/fa6'
 
-function HorizontalScrollCard({data = [], heading, trending}) {
+function HorizontalScrollCard({ data = [], heading, trending }) {
+  const containerRef = useRef()
+  const [isAtStart, setIsAtStart] = useState(true)
+  const [isAtEnd, setIsAtEnd] = useState(false)
 
-    const containerRef = useRef()
+  const SCROLL_AMOUNT = 420
 
-    const handleNext  = ()=>{
-        containerRef.current.scrollLeft +=  200
-    }
-    const handlePrev  = ()=>{
-        containerRef.current.scrollLeft -=  200
-    }
-return (
-    <div className='container mx-auto pl-13 pr-14 my-10'>    
-        <h2 className='text-xl lg:text-2xl font-bold mb-3 text-white'>{heading}</h2>
-    
-        <div className='relative'>
+  const handleScroll = () => {
+    const el = containerRef.current
+    if (!el) return
+    setIsAtStart(el.scrollLeft <= 0)
+    setIsAtEnd(el.scrollLeft + el.clientWidth >= el.scrollWidth - 4)
+  }
 
-            <div ref={containerRef} className='grid grid-cols-[repeat(auto-fit,210px)] grid-flow-col gap-6 overflow-hidden overflow-x-scroll relative z-10 scroll-smooth transition-all scrollbar-none'>
-                {
-                    data.map((data, index) => {
-                        return(
-                            <Card key={data.id+"heading"+index} data={data} trending={trending} index={index + 1} />
-                        )
-                    })
-                }
-            </div>
-            <div className='absolute top-0 hidden lg:flex justify-between w-full mt-35'>
-                <button onClick={handlePrev} className='bg-white h-full p-1 text-black rounded-full -ml-1 z-10'>
-                    <FaCircleArrowLeft />
-                </button>
-                <button onClick={handleNext} className='bg-white h-full p-1 text-black rounded-full -mr-1 z-10'>
-                    <FaCircleArrowRight />
-                </button>
-            </div>
+  const handleNext = () => {
+    containerRef.current.scrollLeft += SCROLL_AMOUNT
+  }
+
+  const handlePrev = () => {
+    containerRef.current.scrollLeft -= SCROLL_AMOUNT
+  }
+
+  return (
+    <div className='w-full px-4 sm:px-6 lg:px-10 xl:px-14 my-8 lg:my-12'>
+      {/* Heading row */}
+      <div className='flex items-center justify-between mb-4'>
+        <h2 className='text-lg sm:text-xl lg:text-2xl font-bold text-white tracking-tight'>
+          {heading}
+        </h2>
+        {/* Mobile arrow buttons alongside heading */}
+        <div className='flex items-center gap-2 lg:hidden'>
+          <button
+            onClick={handlePrev}
+            disabled={isAtStart}
+            className={`p-1.5 rounded-full transition-all duration-200 ${
+              isAtStart
+                ? 'text-gray-600 cursor-not-allowed'
+                : 'text-white hover:text-yellow-400 active:scale-90'
+            }`}
+          >
+            <FaCircleArrowLeft size={22} />
+          </button>
+          <button
+            onClick={handleNext}
+            disabled={isAtEnd}
+            className={`p-1.5 rounded-full transition-all duration-200 ${
+              isAtEnd
+                ? 'text-gray-600 cursor-not-allowed'
+                : 'text-white hover:text-yellow-400 active:scale-90'
+            }`}
+          >
+            <FaCircleArrowRight size={22} />
+          </button>
         </div>
+      </div>
+
+      {/* Scroll container */}
+      <div className='relative group'>
+        {/* Left fade gradient */}
+        <div
+          className={`absolute left-0 top-0 h-full w-8 sm:w-12 bg-linear-to-r from-black/60 to-transparent z-20 pointer-events-none transition-opacity duration-300 ${
+            isAtStart ? 'opacity-0' : 'opacity-100'
+          }`}
+        />
+        {/* Right fade gradient */}
+        <div
+          className={`absolute right-0 top-0 h-full w-8 sm:w-12 bg-linear-to-l from-black/60 to-transparent z-20 pointer-events-none transition-opacity duration-300 ${
+            isAtEnd ? 'opacity-0' : 'opacity-100'
+          }`}
+        />
+
+        {/* Cards row */}
+        <div
+          ref={containerRef}
+          onScroll={handleScroll}
+          className='flex gap-3 sm:gap-4 lg:gap-5 overflow-x-auto scroll-smooth scrollbar-none pb-2'
+        >
+          {data.map((item, index) => (
+            <div
+              key={item.id + heading + index}
+              className='flex-none w-35 sm:w-40 md:w-45 lg:w-50 xl:w-52.5'
+            >
+              <Card data={item} trending={trending} index={index + 1} />
+            </div>
+          ))}
+        </div>
+
+        {/* Desktop side arrow buttons */}
+        <button
+          onClick={handlePrev}
+          disabled={isAtStart}
+          className={`absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 z-30
+            hidden lg:flex items-center justify-center
+            w-9 h-9 rounded-full bg-white shadow-lg
+            transition-all duration-200
+            ${isAtStart
+              ? 'opacity-30 cursor-not-allowed'
+              : 'opacity-0 group-hover:opacity-100 hover:scale-110 active:scale-95'
+            }`}
+        >
+          <FaCircleArrowLeft className='text-black text-lg' />
+        </button>
+
+        <button
+          onClick={handleNext}
+          disabled={isAtEnd}
+          className={`absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-30
+            hidden lg:flex items-center justify-center
+            w-9 h-9 rounded-full bg-white shadow-lg
+            transition-all duration-200
+            ${isAtEnd
+              ? 'opacity-30 cursor-not-allowed'
+              : 'opacity-0 group-hover:opacity-100 hover:scale-110 active:scale-95'
+            }`}
+        >
+          <FaCircleArrowRight className='text-black text-lg' />
+        </button>
+      </div>
     </div>
   )
 }

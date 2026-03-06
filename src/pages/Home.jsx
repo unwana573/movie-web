@@ -4,30 +4,23 @@ import Card from '../components/Card'
 import { useSelector } from 'react-redux'
 import HorizontalScrollCard from '../components/HorizontalScrollCard'
 import axios from "axios"
+import useFetch from '../hooks/useFetch'
 
 function Home() {
-
     const trendingData = useSelector(state => state.movieo.bannerData)
-    const [nowPlayingData, setNowPlayingData] =useState([])
+    const { data : nowPlayingData } = useFetch("/movie/now_playing") 
+    const { data : topRatedData } = useFetch("/movie/top_rated") 
+    const { data : popularTVData } = useFetch("/tv/popular") 
+    const { data : onTheAirData } = useFetch("/tv/on_the_air") 
     
-    const fetchNowPlaying = async()=>{
-        try{
-            const response = await axios.get("/movie/now_playing")
-            setNowPlayingData(response.data.results)
-        }catch(error){
-            
-        }
-    }
-
-    useEffect(()=>{
-        fetchNowPlaying()
-    },[])
-
     return (
         <>
             <BannerHome />
             <HorizontalScrollCard data={trendingData} heading={"Trending"} trending={true}/>
             <HorizontalScrollCard data={nowPlayingData} heading={"Now Playing"}/>
+            <HorizontalScrollCard data={topRatedData} heading={"Top Rated"}/>
+            <HorizontalScrollCard data={popularTVData} heading={"Popular TV Shows"}/>
+            <HorizontalScrollCard data={onTheAirData} heading={"On The Air"}/>
         </>
     )
 }
