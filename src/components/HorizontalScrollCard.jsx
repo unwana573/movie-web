@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import Card from './Card'
 import { FaCircleArrowLeft, FaCircleArrowRight } from 'react-icons/fa6'
 
-function HorizontalScrollCard({ data = [], heading, trending }) {
+function HorizontalScrollCard({ data = [], heading, trending, media_type}) {
   const containerRef = useRef()
   const [isAtStart, setIsAtStart] = useState(true)
   const [isAtEnd, setIsAtEnd] = useState(false)
@@ -84,7 +84,7 @@ function HorizontalScrollCard({ data = [], heading, trending }) {
               key={item.id + heading + index}
               className='flex-none w-35 sm:w-40 md:w-45 lg:w-50 xl:w-52.5'
             >
-              <Card data={item} trending={trending} index={index + 1} />
+              <Card data={item} trending={trending} index={index + 1} media_type={media_type}/>
             </div>
           ))}
         </div>

@@ -17,10 +17,10 @@ function Home() {
         <>
             <BannerHome />
             <HorizontalScrollCard data={trendingData} heading={"Trending"} trending={true}/>
-            <HorizontalScrollCard data={nowPlayingData} heading={"Now Playing"}/>
-            <HorizontalScrollCard data={topRatedData} heading={"Top Rated"}/>
-            <HorizontalScrollCard data={popularTVData} heading={"Popular TV Shows"}/>
-            <HorizontalScrollCard data={onTheAirData} heading={"On The Air"}/>
+            <HorizontalScrollCard data={nowPlayingData} heading={"Now Playing"} media_type={"movie"}/>
+            <HorizontalScrollCard data={topRatedData} heading={"Top Rated"} media_type={"movie"}/>
+            <HorizontalScrollCard data={popularTVData} heading={"Popular TV Shows"} media_type={"tv"}/>
+            <HorizontalScrollCard data={onTheAirData} heading={"On The Air"} media_type={"tv"}/>
         </>
     )
 }
