@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import Footer from '../components/Footer'
 import moment from 'moment'
+import Divider from '../components/Divider'
 
 function DetailPage() {
 
@@ -17,6 +18,9 @@ function DetailPage() {
   console.log("cast data:", castData)
 
   const duration = (Number(data?.runtime)/60).toFixed(1).split(".").join(",") 
+  const writer = castData?.crew?.filter(el => el?.job === "Writer")?.map(el => el.name)?.join(",")
+
+  console.log("Writer", writer)
   return (
     <>
       <div>
@@ -32,7 +36,7 @@ function DetailPage() {
           </div>
 
           <div className='container mx-auto px-3 py-16 lg:py-0 flex flex-col lg:flex-row gap-5 lg:gap-10'>
-            <div className='relative mx-auto lg:-mt-28 lg:mx-0 w-fit '>
+            <div className='relative mx-auto lg:-mt-28 lg:mx-0 w-fit min-w-60'>
               <img
               src={imageURL + data?.poster_path}
               alt=""
@@ -41,12 +45,13 @@ function DetailPage() {
             </div>
 
             <div>
-              <h2 className='text-2xl font-bold text-white'>
+              <h2 className='text-2xl lg:text-4xl font-bold text-white'>
                 {data?.title || data?.name}
               </h2>
               <p className='text-neutral-400'>{data?.tagline}</p>
 
-              <div className='flex items-center my-3 gap-3'>
+              <Divider />
+              <div className='flex items-center gap-3'>
                 <p>
                   Rating :   {Number(data?.vote_average).toFixed(1)}
                 </p>
@@ -60,10 +65,14 @@ function DetailPage() {
                 </p>
               </div>
 
+              <Divider />
+
                 <div>
                   <div>
-                    <h3 className='text-xl font-bold text-white mb-1'>Overview</h3>
+                    <h3 className='text-xl font-bold text-white'>Overview</h3>
                     <p>{data?.overview}</p>
+
+                    <Divider />
 
                     <div className='flex items-center gap-3 my-3 text-center'>
                       <p>
@@ -78,7 +87,40 @@ function DetailPage() {
                         Revenue : {Number(data?.revenue)}
                       </p>
                     </div>
+
+                    <Divider />
                   </div>
+
+                  <div>
+                    <p>
+                        <span className='text-white '>Director :</span> {castData?.crew?.[0]?.name}
+                    </p>
+                    <Divider />
+                    <p>
+                      <span className='text-white'>Writer : {writer}</span>
+                    </p>
+                  </div>
+
+                  <Divider />
+                  <h2 className='font-bold text-lg '>Cast : </h2>
+                  <div className='grid grid-cols-[repeat(auto-fit,96px)] gap-5'>
+                  {
+                    castData?.cast?.filter(el => el?.profile_path).map((starCast, index) => {
+                      return (
+                        <div key={index}>
+                          <div>
+                            <img 
+                              src={imageURL + starCast?.profile_path} 
+                              alt="" 
+                              className='w-24 h-24 object-cover rounded-full'
+                            />
+                          </div>
+                          <p className='font-bold text-center text-sm text-neutral-400'>{starCast?.name}</p>
+                        </div>
+                      )
+                    })
+                  }
+                </div>
                 </div>
             </div>
           </div>
