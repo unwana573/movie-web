@@ -43,8 +43,8 @@ function App() {
         <div className="min-h-[70vh]">
             <Outlet />
         </div>
-        <Footer />
         <MovieNavigation />
+        {/* <Footer /> */}
     </main>
   )
 }

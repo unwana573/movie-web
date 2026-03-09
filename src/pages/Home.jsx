@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux'
 import HorizontalScrollCard from '../components/HorizontalScrollCard'
 import axios from "axios"
 import useFetch from '../hooks/useFetch'
+import Footer from '../components/Footer'
 
 function Home() {
     const trendingData = useSelector(state => state.movieo.bannerData)
@@ -21,6 +22,7 @@ function Home() {
             <HorizontalScrollCard data={topRatedData} heading={"Top Rated"} media_type={"movie"}/>
             <HorizontalScrollCard data={popularTVData} heading={"Popular TV Shows"} media_type={"tv"}/>
             <HorizontalScrollCard data={onTheAirData} heading={"On The Air"} media_type={"tv"}/>
+            <Footer />
         </>
     )
 }

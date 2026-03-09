@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Card from '../components/Card'
+import Footer from '../components/Footer'
 
 function SearchPage() {
   const location = useLocation()
@@ -48,6 +49,7 @@ function SearchPage() {
   },[])
 
   return (
+  <>
     <div className='py-16 px-16'>
 
     <div className='lg:hidden my-2 sticky top-17.5 z-30'>
@@ -79,6 +81,8 @@ function SearchPage() {
         )}
       </div>
     </div>
+  <Footer />
+  </>
   )
 }
 

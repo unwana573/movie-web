@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Card from '../components/Card'
 import axios from 'axios'
+import Footer from '../components/Footer'
 
 function ExplorePage() {
     const params = useParams()
@@ -51,6 +52,7 @@ function ExplorePage() {
     },[])
 
     return (
+    <>
         <div className='pt-16 ml-7'>
             <div className='container mx-auto'>
             <h3 className='capitalize text-lg lg:text-2xl font-semibold my-3 ml-7'>Popular {params.explore}</h3>
@@ -66,6 +68,8 @@ function ExplorePage() {
             </div>
             </div>
         </div>
+    <Footer />
+    </>
     )
 }
 
