@@ -28,7 +28,7 @@ function HorizontalScrollCard({ data = [], heading, trending, media_type}) {
     <div className='w-full px-4 sm:px-6 lg:px-10 xl:px-14 my-8 lg:my-12'>
       {/* Heading row */}
       <div className='flex items-center justify-between mb-4'>
-        <h2 className='text-lg sm:text-xl lg:text-2xl font-bold text-white tracking-tight'>
+        <h2 className='text-lg sm:text-xl lg:text-2xl font-bold text-white tracking-tight capitalize'>
           {heading}
         </h2>
         {/* Mobile arrow buttons alongside heading */}

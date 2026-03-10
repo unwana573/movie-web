@@ -7,16 +7,19 @@ import { navigation } from '../constant/navigation'
 
 function Header() {
     const location = useLocation();
-    const removeSpace = location?.search?.slice(3)?.split("%20")?.join(" ");  
-    const [searchInput, setSearchInput] = useState(removeSpace);
     const navigate = useNavigate();
+    const [searchInput, setSearchInput] = useState("");
 
-    console.log("Current location:",);
+    useEffect(() => {
+        const query = new URLSearchParams(location.search).get('query') || ""
+        setSearchInput(query)
+    }, [location.search])
+
     useEffect(() => {
         if(searchInput){
             navigate(`/search?query=${searchInput}`);
         }
-    },[searchInput]);
+    }, [searchInput]);
 
     const handleSubmit = (e) => {
         e.preventDefault();

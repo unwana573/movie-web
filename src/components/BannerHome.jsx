@@ -29,7 +29,7 @@ function BannerHome() {
         },5000);
 
         return ()=>clearInterval(interval)
-    },[bannerData,imageURL])
+    },[bannerData,imageURL,currentImage])
 
 
 return (

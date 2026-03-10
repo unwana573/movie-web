@@ -8,7 +8,7 @@ function Card({ data, trending, index, media_type }) {
     const mediaType = data.media ?? media_type
 
 return (
-    <Link to={"/"+mediaType+"/"+data.id} className='w-full min-[530px] max-w-57.5 h-80 overflow-hidden block rounded relative hover:scale-105 transition-transform duration-300'>
+    <Link to={"/"+mediaType+"/"+data.id} className='w-full min-[530px] max-w-57.5 h-65 overflow-hidden block rounded relative hover:scale-105 transition-transform duration-300'>
 
         {
             data?.poster_path ? (
@@ -21,9 +21,9 @@ return (
             )
         }
 
-        <img src={imageURL + data.poster_path} alt={data.title} />
+        {/* <img src={imageURL + data.poster_path} alt={data.title} /> */}
 
-        <div className='absolute top-4 '>
+        <div className='absolute '>
             {
                 trending && (
                     <div className='py-1 px-4 backdrop-blur-3xl rounded-r-full bg-black/60 overflow-hidden'>

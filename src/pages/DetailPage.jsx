@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import useFetchDetails from '../hooks/useFetchDetails'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import Footer from '../components/Footer'
 import moment from 'moment'
 import Divider from '../components/Divider'
+import HorizontalScrollCard from '../components/HorizontalScrollCard'
+import useFetch from "../hooks/useFetch"
+import VideoPlay from '../components/VideoPlay'
 
 function DetailPage() {
 
@@ -13,9 +16,18 @@ function DetailPage() {
 
   const { data } = useFetchDetails(`/${params?.media_type}/${params?.id}`)
   const { data: castData } = useFetchDetails(`/${params?.media_type}/${params?.id}/credits`)
+  const {data : similarData } = useFetch(`${params?.media_type}/${params?.id}/similar`) 
+  const {data : recommendationData } = useFetch(`${params?.media_type}/${params?.id}/recommendations`) 
+  const [playVideo, setPlayVideo] = useState(false)
+  const [playVideoId,  setPlayVideoId] = useState("")
 
-  console.log("params:", params)
+  console.log("similarData:", similarData)
   console.log("cast data:", castData)
+
+  const handlePlayVideo = (data)=> {
+    setPlayVideo(data.id)
+    setPlayVideo(true)
+  }
 
   const duration = (Number(data?.runtime)/60).toFixed(1).split(".").join(",") 
   const writer = castData?.crew?.filter(el => el?.job === "Writer")?.map(el => el.name)?.join(",")
@@ -25,7 +37,7 @@ function DetailPage() {
     <>
       <div>
         <div className='w-full h-100 relative'>
-          <div className='w-full h-full hidden lg:block'>
+          <div className='w-full h-full hidden lg:block mt-16'>
             <img
               src={imageURL + data?.backdrop_path}
               alt=""
@@ -42,6 +54,8 @@ function DetailPage() {
               alt=""
               className='h-80 w-60 object-cover rounded-2xl'
               />
+
+              <button onClick={()=> handlePlayVideo(data)} className='mt-3 w-full py-2 px-4 text-center bg-white text-black rounded font-bold text:lg hover:bg-linear-to-l from-red-500 to-orange-500 hover:scale-105 transition-all'>Play Now</button>
             </div>
 
             <div>
@@ -124,9 +138,20 @@ function DetailPage() {
                 </div>
             </div>
           </div>
+        <div>
+          <HorizontalScrollCard data={similarData} heading={"Simliar"+params?.media_type} media_type={params?.media_type}/>
+          <HorizontalScrollCard data={recommendationData} heading={"Recommendation"+params?.media_type} media_type={params?.media_type}/>
         </div>
+
+        {
+          playVideo && (
+            <VideoPlay data={playVideoId} close={()=>setPlayVideo(false)} media_type={params?.media_type}/>
+          )
+        }
+      <Footer />
+        </div>
+
       </div>
-      {/* <Footer /> */}
   </>
   )
 }

@@ -10,6 +10,11 @@ function SearchPage() {
   const [page, setPage] = useState([])
   const navigate = useNavigate()
 
+  const query = new URLSearchParams(location.search).get('query') || ""
+
+  console.log("location.search:", location.search)
+console.log("query value:", query)
+
   const fetchData = async () => {
     try {
       const query = new URLSearchParams(location.search).get('query')
@@ -57,6 +62,7 @@ function SearchPage() {
         type="text" 
         placeholder='Search here....'
         onChange={(e)=> navigate(`/search?query=${e.target.value}`)}
+        value={query}
         className='px-4 text-lg w-full h-13 bg-white rounded-full text-neutral-900'
       />
     </div>
